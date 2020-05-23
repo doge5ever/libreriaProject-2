@@ -1,0 +1,15 @@
+<div id="nav-bar">
+  <a routerLink="" id="logo"><img [src]="smallLogoDirectory"></a>
+  <a routerLink="" class="nav">{{navBarText1}}</a>
+  <a routerLink="" class="nav">{{navBarText2}}</a>
+  <a routerLink="" class="nav">{{navBarText3}}</a>
+  <div>
+  </div>
+  <div id="login-bar">
+    <span *ngIf="isLoggedIn; else elseBlock"><a [routerLink]="['/profile']">{{loggedInText}}</a></span>
+    <ng-template #elseBlock><a [routerLink]="['/login']">{{notLoggedInText}}</a></ng-template>
+  </div>
+  <div id="cart">
+    <a [routerLink]="['/cart']"><img [src]="cartLogoDirectory" height="45px"></a>
+  </div>
+</div>
