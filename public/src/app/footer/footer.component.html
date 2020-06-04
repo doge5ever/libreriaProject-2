@@ -1,0 +1,22 @@
+<div class="footer">
+  <div class="subscribe">
+    <h1>{{subscribeText}}</h1>
+    <div class="subscribe-container">
+      <form class="subscribe-form" [formGroup]="subscribeFormGroup" (submit)="onSubscribe()">
+        <input class="subscribe-text" type="text" formControlName="emailAddress" [placeholder]="subscribeInputPlaceholder">
+        <button class="subscribe-button" type="submit">{{subscribeButtonText}}</button>
+      </form>
+    </div>
+    <div class="error-msg">{{emailAddressErrObs | async}}</div>
+  </div>
+  <div class="vert-divider">
+  </div>
+  <div class="follow-us">
+    <h1>{{followUsText}}</h1>  
+    <div class="social-media">
+      <a href=""><img [src]="facebookLogoDirectory"></a>
+      <a href=""><img [src]="twitterLogoDirectory"></a>
+      <a href=""><img [src]="pinterestLogoDirectory"></a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+.footer {
+  background: #bba3a2;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  margin-top: 100px;
+  padding: 15px 10px 50px 30px;
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .subscribe-container {
+
+    .subscribe-text {
+      border: 0px;
+      font-size: 18px;
+      padding-top: 4px 0px 4px 5px;
+      width: 400px;
+    }
+    
+    .subscribe-button {
+      background-color: lightgray;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      padding-top: 4px 0px;
+    }
+
+    .subscribe-text:focus, .subscribe-button:focus {
+      outline: none;
+    }
+  }
+
+  .social-media a img {
+    box-shadow: black 1pt 1pt;
+    height: 80px;
+    margin-right: 20px;
+  }
+}
+
+.vert-divider {
+  border-right: 1px solid rgba(0,0,0,0.2);
+  margin: 0px 40px;
+}
