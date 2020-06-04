@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DuplicateEmailValidator } from '../utils/customAsyncValidators'
+import { errorMessageObservables } from '../utils/errorMessageObservables';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -9,38 +12,38 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class FooterComponent implements OnInit {
   subscribeFormGroup: FormGroup;
-  validationErrorMessageHidden: boolean;
-  httpErrorMessageHidden: boolean;
+  emailAddressErrObs: Observable<string>;
   
   constructor(
     private http: HttpService
   ) { };
 
   ngOnInit(): void {
-    this.initializeFormGroup();
-    this.hideErrorMessages();
+    this.initializeSubscribeForm();
+    this.initializeErrorMessage();
   };
 
-  initializeFormGroup = (): void => {
+  initializeSubscribeForm = (): void => {
     this.subscribeFormGroup = new FormGroup({
-      emailAddress: new FormControl(null, [Validators.email, Validators.required])
-    });
+      emailAddress: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.email, Validators.required],
+        asyncValidators: DuplicateEmailValidator(this.http)
+      })
+    })
   };
 
-  hideErrorMessages = (): void => {
-    this.validationErrorMessageHidden = true;
-    this.httpErrorMessageHidden = true;
-  }
+  initializeErrorMessage = (): void => {
+    this.emailAddressErrObs = errorMessageObservables(this.subscribeFormGroup.get('emailAddress'))
+  };
 
-  submitEmailAddress = (): void => {
-    this.hideErrorMessages();
+  onSubscribe = (): void => {
     if (this.subscribeFormGroup.valid) {
       this.http.postEmailSubscription(this.subscribeFormGroup.value.emailAddress)
         .subscribe(
-          (response) => console.log(response),
-          (error) => this.httpErrorMessageHidden = false
+          (response) => console.log(response)
         )
-    } else {this.validationErrorMessageHidden = false;}
+    }
   };
 
   subscribeText: string = 'Subscribe now for coupons, great deals and more!';

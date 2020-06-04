@@ -1,24 +1,19 @@
-<div id="footer">
-  <div id="subscribe">
+<div class="footer">
+  <div class="subscribe">
     <h1>{{subscribeText}}</h1>
-    <div id="subscribe-container">
-      <form id="subscribe-form" [formGroup]="subscribeFormGroup" (submit)="submitEmailAddress()">
-        <input id="subscribe-text" type="text" formControlName="emailAddress" [placeholder]="subscribeInputPlaceholder">
-        <button id="subscribe-button" type="submit">{{subscribeButtonText}}</button>
+    <div class="subscribe-container">
+      <form class="subscribe-form" [formGroup]="subscribeFormGroup" (submit)="onSubscribe()">
+        <input class="subscribe-text" type="text" formControlName="emailAddress" [placeholder]="subscribeInputPlaceholder">
+        <button class="subscribe-button" type="submit">{{subscribeButtonText}}</button>
       </form>
     </div>
-    <div class="error-message" [hidden]="validationErrorMessageHidden">
-      Not a valid email address.
-    </div>
-    <div class="error-message" [hidden]="httpErrorMessageHidden">
-      An error has occured.
-    </div>
+    <div class="error-msg">{{emailAddressErrObs | async}}</div>
   </div>
   <div class="vert-divider">
   </div>
-  <div id="follow-us">
+  <div class="follow-us">
     <h1>{{followUsText}}</h1>  
-    <div id="social-media">
+    <div class="social-media">
       <a href=""><img [src]="facebookLogoDirectory"></a>
       <a href=""><img [src]="twitterLogoDirectory"></a>
       <a href=""><img [src]="pinterestLogoDirectory"></a>
